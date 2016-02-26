@@ -1,0 +1,16 @@
+- hosts: localhost
+  user: simon
+  sudo: True
+  serial: 1
+  tasks:
+
+  - name: Add suricata repository
+    apt_repository: repo='ppa:oisf/suricata-stable'
+  
+  - name: Update System
+    action: apt update-cache=yes
+    
+  - name: Install Required Software
+    action: apt pkg={{item}} state=present
+    with_items:
+    - suricata
