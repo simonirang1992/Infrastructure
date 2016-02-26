@@ -28,6 +28,10 @@
   - name: Add the repository definition for logstash
     shell: 'echo "deb http://packages.elastic.co/logstash/2.2/debian stable main" | sudo tee /etc/apt/sources.list.d/logstash-2.2.x.list'
 
+  - name: Accept Java 8 License
+    sudo: yes
+    debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
   - name: Install JRE
     apt: pkg=oracle-java8-installer state=latest update-cache=yes force=yes
 
