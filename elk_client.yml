@@ -1,0 +1,19 @@
+- hosts: localhost
+  user: simon
+  sudo: True
+  serial: 1
+  tasks:
+
+  - name: Add Filebeat repolist
+    shell: 'echo "deb https://packages.elastic.co/beats/apt stable main" |  sudo tee -a /etc/apt/sources.list.d/beats.list'
+
+  - name: Add GPG Key
+    shell: 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
+
+  - name: Update System
+    action: apt update-cache=yes
+    
+  - name: Install Required Software
+    action: apt pkg={{item}} state=present
+    with_items:
+    - filebeat
