@@ -1,0 +1,28 @@
+- hosts: all
+  user: simon
+  sudo: True
+  serial: 1
+  tasks:
+  - name: Update System
+    action: apt update-cache=yes
+
+  - name: Install Required Softwares
+    action: apt pkg={{item}} state=present
+    with_items:
+    - rkhunter
+
+  - name: Copy Configuration File
+    copy: src=files/rkhunter.conf dest=/etc/rkhunter.conf owner=simon group=simon mode=640
+
+  - name: Update RKHunter
+    command: 'sudo rkhunter --update'
+
+  - name: Store current values
+    command: 'sudo rkhunter --propupd'
+
+  - name: Initial run for RKHunter
+    command: 'sudo rkhunter -c --enable all --disable none --quiet'
+
+  - name: Set cronjob
+    cron: name="RKHunter" minute="30" hour="9" weekday="1" job="/usr/bin/rkhunter --cronjob --update --quiet"
+
