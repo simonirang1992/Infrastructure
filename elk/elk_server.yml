@@ -5,7 +5,9 @@
   tasks:
 
   - name: Create working directory
-    command: path=/home/simon/working state=directory mode=0700 chdir=/home/simon/working
+    command: path=/home/simon/working state=directory mode=0700 
+    args:
+      chdir: /home/simon/working
 
   - name: Add Java 8 Repository
     apt_repository: repo='ppa:webupd8team/java'
