@@ -62,11 +62,14 @@
   - name: Move Nginx configuration file
     copy: src=config/nginx/server dest=/etc/nginx/sites-available/server
 
-  - name: Download Kibana dashboard
-    shell: 'curl -L -O https://download.elastic.co/beats/dashboards/beats-dashboards-1.1.1.zip'
+  - name: Restart Nginx
+    service: name=nginx state=restart
 
   - name: Create admin user
     shell: 'htpasswd -c /etc/nginx/htpasswd.users kibanaadmin'
+
+  - name: Download Kibana dashboard
+    shell: 'curl -L -O https://download.elastic.co/beats/dashboards/beats-dashboards-1.1.1.zip'
 
   - name: Create certificate storage
     shell: 'sudo mkdir -p /etc/pki/elk/certs'
@@ -77,5 +80,4 @@
     ignore_errors: yes
 
   - name: Create SSL Certs
-    shell: 'sudo openssl req -config /etc/ssl/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout /etc/pki/elk/private/logstash-forwarder.key -out /etc/pki/elk/certs/logstash-forwarder.crt'
-    ignore_errors: yes
+    shell: 'sudo openssl req -subj "/CN=simonsong.online/" -x509 -days 3650 -batch -nodes -newkey rsa:4096 -keyout /etc/pki/elk/private/logstash-forwarder.key -out /etc/pki/elk/certs/logstash-forwarder.crt'
