@@ -7,7 +7,6 @@
 #
 # Setup
 #
-
   - name: Create working directory
     file: path=/home/simon/working state=directory mode=0700
 
