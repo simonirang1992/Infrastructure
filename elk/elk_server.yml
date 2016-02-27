@@ -1,3 +1,8 @@
+#
+# ELK Server Deployment Script
+# Author: Simon(Jae Sung) Song
+# 
+
 - hosts: localhost
   user: simon
   sudo: True
@@ -118,3 +123,6 @@
 
   - name: Download Kibana dashboard
     get_url: url=https://download.elastic.co/beats/dashboards/beats-dashboards-1.1.1.zip dest=/home/simon/working/beats-dashboards-1.1.1.zip
+
+  - name: Unzip Kibana dashboard
+    unarchive: src=/home/simon/beats-dashboards-1.1.1.zip dest=/home/simon/ copy=no

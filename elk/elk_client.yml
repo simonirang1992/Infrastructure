@@ -1,3 +1,8 @@
+#
+# ELK Client Deployment Script
+# Author: Simon(Jae Sung) Song
+#      
+
 - hosts: localhost
   user: simon
   sudo: True
