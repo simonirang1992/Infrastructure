@@ -51,6 +51,14 @@
   - name: Run Logstash on bootup
     shell: 'sudo update-rc.d logstash defaults 96 9'
 
+  - name: Remove default Nginx configuration file
+    file: path=/etc/nginx/sites-enabled/default state=absent
+    ignore_errors: yes
+
+  - name: Remove default Nginx configuration file
+    file: path=/etc/nginx/sites-available/default state=absent
+    ignore_errors: yes
+
   - name: Move Nginx configuration file
     copy: src=config/nginx/server dest=/etc/nginx/sites-available/server
 
