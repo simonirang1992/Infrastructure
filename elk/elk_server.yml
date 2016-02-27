@@ -125,7 +125,7 @@
     get_url: url=https://download.elastic.co/beats/dashboards/beats-dashboards-1.1.1.zip dest=/home/simon/working/beats-dashboards-1.1.1.zip
 
   - name: Unzip Kibana dashboard
-    unarchive: src=/home/simon/beats-dashboards-1.1.1.zip dest=/home/simon/working/ copy=no
+    unarchive: src=/home/simon/working/beats-dashboards-1.1.1.zip dest=/home/simon/working/ copy=no
 
   - name: Run Kibana dashboard script
     command: sh /home/simon/working/beats-dashboards-1.1.1/load.sh
