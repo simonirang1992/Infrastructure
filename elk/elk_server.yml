@@ -8,7 +8,7 @@
     apt_repository: repo='ppa:webupd8team/java'
   
   - name: Add Nginx Repository
-    apt_repository: repo='ppa:nginx/mainline'
+    apt_repository: repo='ppa:nginx/development'
 
   - name: Update System
     action: apt update-cache=yes
@@ -38,6 +38,7 @@
     - nginx
     - elasticsearch
     - kibana
+    - unzip
     - apache2-utils
     - logstash
 
@@ -46,6 +47,15 @@
 
   - name: Run Kibana on bootup
     shell: 'sudo update-rc.d kibana defaults 96 9'
+
+  - name: Run Logstash on bootup
+    shell: 'sudo update-rc.d logstash defaults 96 9'
+
+  - name: Move Nginx configuration file
+    copy: src=config/nginx/server dest=/etc/nginx/sites-available/server
+
+  - name: Download Kibana dashboard
+    shell: 'curl -L -O https://download.elastic.co/beats/dashboards/beats-dashboards-1.1.1.zip'
 
   - name: Create admin user
     shell: 'htpasswd -c /etc/nginx/htpasswd.users kibanaadmin'
