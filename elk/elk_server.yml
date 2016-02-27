@@ -63,7 +63,7 @@
     copy: src=config/nginx/server dest=/etc/nginx/sites-available/server
 
   - name: Restart Nginx
-    service: name=nginx state=restart
+    service: name=nginx state=restarted
 
   - name: Create admin user
     shell: 'htpasswd -c /etc/nginx/htpasswd.users kibanaadmin'
@@ -81,3 +81,19 @@
 
   - name: Create SSL Certs
     shell: 'sudo openssl req -subj "/CN=simonsong.online/" -x509 -days 3650 -batch -nodes -newkey rsa:4096 -keyout /etc/pki/elk/private/logstash-forwarder.key -out /etc/pki/elk/certs/logstash-forwarder.crt'
+
+  - name: Move logstash configuration file1
+    copy: src=config/logstash/02-beats-input.conf dest=/etc/logstash/conf.d/02-beats-input.conf
+
+  - name: Move logstash configuration file2
+    copy: src=config/logstash/10-syslog-filter.conf dest=/etc/logstash/conf.d/10-syslog-filter.conf
+
+  - name: Move logstash configuration file3
+    copy: src=config/logstash/30-elasticsearch-output.conf dest=/etc/logstash/conf.d/30-elasticsearch-output.conf
+
+  - name: Logstash configtest
+    shell: 'sudo service logstash configtest'
+
+  - name: Restart Logstash	
+    service: name=logstash state=restarted
+
