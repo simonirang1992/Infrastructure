@@ -5,7 +5,7 @@
   tasks:
 
   - name: Create working directory
-    shell: 'mkdir /home/simon/working'
+    file: path=/home/simon/working state=directory mode=0755
     args:
       chdir: /home/simon/working
 
