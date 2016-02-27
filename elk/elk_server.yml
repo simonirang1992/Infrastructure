@@ -6,9 +6,8 @@
 
   - name: Create working directory
     file: path=/home/simon/working state=directory mode=0700
-
-  - name: Move to working directory
-    command: chdir=/home/simon/working
+    args:
+      chdir=/home/simon/working
 
   - name: Add Java 8 Repository
     apt_repository: repo='ppa:webupd8team/java'
