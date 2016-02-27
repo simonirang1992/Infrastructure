@@ -41,6 +41,12 @@
     - apache2-utils
     - logstash
 
+  - name: Run Elasticsearch on bootup
+    shell: 'sudo update-rc.d elasticsearch defaults 95 10'
+
+  - name: Run Kibana on bootup
+    shell: 'sudo update-rc.d kibana defaults 96 9'
+
   - name: Create admin user
     shell: 'htpasswd -c /etc/nginx/htpasswd.users kibanaadmin'
 
