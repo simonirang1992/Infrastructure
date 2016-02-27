@@ -22,3 +22,6 @@
     action: apt pkg={{item}} state=present
     with_items:
     - filebeat
+
+  - name: Create key directory
+    shell: 'sudo mkdir -p /etc/pki/elk/certs'
