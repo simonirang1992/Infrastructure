@@ -25,3 +25,9 @@
 
   - name: Create key directory
     shell: 'sudo mkdir -p /etc/pki/elk/certs'
+
+  - name: Restart Filebeat
+    service: name=filebeat state=restarted
+
+  - name: Make Filebeat start upon boot
+    shell: 'sudo update-rc.d filebeat defaults 95 10'

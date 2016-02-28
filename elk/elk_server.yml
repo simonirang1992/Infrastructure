@@ -57,6 +57,9 @@
   - name: Run Elasticsearch on bootup
     shell: 'sudo update-rc.d elasticsearch defaults 95 10'
 
+  - name: Restart Elasticsearch
+    service: name=elasticsearch state=restarted
+
 #
 # Nginx
 #
@@ -126,6 +129,9 @@
 
   - name: Unzip Kibana dashboard
     unarchive: src=/home/simon/working/beats-dashboards-1.1.1.zip dest=/home/simon/working/ copy=no
+
+  - name: Restart Kibana
+    service: name=kibana state=restarted
 
   - name: Run Kibana dashboard script
     command: sh /home/simon/working/beats-dashboards-1.1.1/load.sh
