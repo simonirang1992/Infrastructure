@@ -20,7 +20,7 @@
     copy: src=config/suricata.yaml dest=/etc/suricata/suricata.yaml owner=simon mode=644
 
   - name: Copy Oinkmaster configuration file
-    copy: src=config/oinkmaster.conf /etc/oinkmaster.conf owner=simon mode=644
+    copy: src=config/oinkmaster.conf dest=/etc/oinkmaster.conf owner=simon mode=644
 
   - name: Run Oinkmaster (Update Rules)
     command: 'sudo oinkmaster -C /etc/oinkmaster.conf -o /etc/suricata/rules'
