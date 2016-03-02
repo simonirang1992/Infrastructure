@@ -14,10 +14,19 @@
     action: apt pkg={{item}} state=present
     with_items:
     - suricata
+    - oinkmaster
 
-  - name: Copy configuration file
+  - name: Copy Suricata configuration file
     copy: src=config/suricata.yaml dest=/etc/suricata/suricata.yaml mode=644
 
-  - name: Start Suricata
-    command: 'sudo suricata -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal'
+  - name: Copy Oinkmaster configuration file
+    copy: src=config/oinkmaster.conf /etc/oinkmaster.conf
 
+  - name: Run Oinkmaster (Update Rules)
+    command: 'sudo oinkmaster -C /etc/oinkmaster.conf -o /etc/suricata/rules'
+
+  - name: Add above task as cronjob
+    cron: name="Oinkmaster" minute="45" hour="8" job="sudo oinkmaster -C /etc/oinkmaster.conf -o /etc/suricata/rules'
+
+  - name: Start Suricata
+    command: 'sudo suricata -c /etc/suricata/suricarta.yaml -i eth0 --init-errors-fatal'
