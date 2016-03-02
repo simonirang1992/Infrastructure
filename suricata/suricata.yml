@@ -14,3 +14,10 @@
     action: apt pkg={{item}} state=present
     with_items:
     - suricata
+
+  - name: Copy configuration file
+    copy: src=config/suricata.yaml dest=/etc/suricata/suricata.yaml mode=644
+
+  - name: Start Suricata
+    command: 'sudo suricata -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal'
+
