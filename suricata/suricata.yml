@@ -1,6 +1,6 @@
 - hosts: localhost
-  user: simon
-  sudo: True
+  sudo: yes
+  become_method: sudo
   serial: 1
   tasks:
 
