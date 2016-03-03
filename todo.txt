@@ -1,3 +1,3 @@
 1. ELK configuration files
-2. Suricata configuration files
+2. Tweak Suricata configuration files
 
