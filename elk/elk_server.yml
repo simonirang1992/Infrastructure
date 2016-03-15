@@ -135,3 +135,12 @@
 
   - name: Run Kibana dashboard script
     command: sh /home/simon/working/beats-dashboards-1.1.1/load.sh
+
+#
+# Template
+#
+  - name: Filebeat template for Elasticsearch
+    get_url: url=https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json dest=/home/simon/working/filebeat-index-template.json
+
+  - name: Load Filebeat template
+    command: curl -XPUT 'http://localhost:9200/_template/filebeat?pretty' -d@filebeat-index-template.json
