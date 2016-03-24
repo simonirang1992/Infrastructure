@@ -88,7 +88,7 @@ outputs:
 
   # a line based alerts log similar to Snort's fast.log
   - fast:
-      enabled: yes
+      enabled: no
       filename: fast.log
       append: yes
       #filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
@@ -154,8 +154,8 @@ outputs:
         - files:
             force-magic: no   # force logging magic on all logged files
             force-md5: no     # force logging of md5 checksums
-        #- drop:
-        #    alerts: no       # log alerts that caused drops
+        - drop:
+            alerts: yes       # log alerts that caused drops
         - smtp:
             #extended: yes # enable this for extended logging information
             # this includes: bcc, message-id, subject, x_mailer, user-agent
@@ -218,7 +218,7 @@ outputs:
 
   # a line based log of HTTP requests (no alerts)
   - http-log:
-      enabled: yes
+      enabled: no
       filename: http.log
       append: yes
       #extended: yes     # enable this for extended logging information
@@ -329,7 +329,7 @@ outputs:
 
   # a line based information for dropped packets in IPS mode
   - drop:
-      enabled: no
+      enabled: yes
       filename: drop.log
       append: yes
       #filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
@@ -1437,7 +1437,7 @@ app-layer:
       libhtp:
 
          default-config:
-           personality: IDS
+           personality: IPS
 
            # Can be specified in kb, mb, gb.  Just a number indicates
            # it's in bytes.

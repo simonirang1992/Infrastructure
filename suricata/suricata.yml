@@ -29,7 +29,7 @@
     cron: name="Oinkmaster" minute="45" hour="8" job="oinkmaster -C /etc/oinkmaster.conf -o /etc/suricata/rules"
 
   - name: Start Suricata
-    command: 'suricata -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal -D'
+    command: 'suricata -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal -D -q 0'
     ignore_errors: yes
 
   - name: Start Suricata if not started
@@ -37,6 +37,12 @@
 
   - name: Test if Suricata is working or not
     command: 'curl testmyids.com'
+
+  - name: Set iptable to forward incomming traffic to suricata
+    command: 'iptables -I INPUT -j NFQUEUE'
+
+  - name: Set iptable to forward outgoing traffic to suricata
+    command: 'iptables -I OUTPUT -j NFQUEUE'
 
   - name: Print Instruction
     debug: msg="Please check /var/log/suricata/fast.log. If you see output like 'GPL', then Suricata is functioning properly"
