@@ -28,8 +28,8 @@
   - name: Add above task as cronjob
     cron: name="Oinkmaster" minute="45" hour="8" job="oinkmaster -C /etc/oinkmaster.conf -o /etc/suricata/rules"
 
-  - name: Start Suricata
-    command: 'suricata -c /etc/suricata/suricata.yaml -i eth0 --init-errors-fatal -D -q 0'
+  - name: Start Suricata in IPS mode
+    command: 'suricata -c /etc/suricata/suricata.yaml -q 0 --init-errors-fatal -D'
     ignore_errors: yes
 
   - name: Start Suricata if not started
@@ -46,3 +46,6 @@
 
   - name: Print Instruction
     debug: msg="Please check /var/log/suricata/fast.log. If you see output like 'GPL', then Suricata is functioning properly"
+
+  - name: Download pytbull to test IPS
+    get_url: url=http://downloads.sourceforge.net/project/pytbull/pytbull-2.1.tar.bz2?r=http%3A%2F%2Fpytbull.sourceforge.net%2Findex.php%3Fpage%3Ddownloads&ts=1458853067&use_mirror=tenet dest=/home/simon mode=0700
