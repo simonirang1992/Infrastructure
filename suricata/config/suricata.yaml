@@ -1437,7 +1437,7 @@ app-layer:
       libhtp:
 
          default-config:
-           personality: IPS
+           personality: IDS
 
            # Can be specified in kb, mb, gb.  Just a number indicates
            # it's in bytes.
