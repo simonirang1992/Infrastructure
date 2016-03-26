@@ -47,5 +47,3 @@
   - name: Print Instruction
     debug: msg="Please check /var/log/suricata/fast.log. If you see output like 'GPL', then Suricata is functioning properly"
 
-  - name: Download pytbull to test IPS
-    get_url: url=http://downloads.sourceforge.net/project/pytbull/pytbull-2.1.tar.bz2?r=http%3A%2F%2Fpytbull.sourceforge.net%2Findex.php%3Fpage%3Ddownloads&ts=1458853067&use_mirror=tenet dest=/home/simon mode=0700

@@ -218,13 +218,13 @@ outputs:
 
   # a line based log of HTTP requests (no alerts)
   - http-log:
-      enabled: no
+      enabled: yes
       filename: http.log
       append: yes
       #extended: yes     # enable this for extended logging information
       #custom: yes       # enabled the custom logging format (defined by customformat)
       #customformat: "%{%D-%H:%M:%S}t.%z %{X-Forwarded-For}i %H %m %h %u %s %B %a:%p -> %A:%P"
-      #filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
+      filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
 
   # a line based log of TLS handshake parameters (no alerts)
   - tls-log:
@@ -332,7 +332,7 @@ outputs:
       enabled: yes
       filename: drop.log
       append: yes
-      #filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
+      filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
 
   # output module to store extracted files to disk
   #
