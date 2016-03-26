@@ -28,6 +28,10 @@
   - name: Add above task as cronjob
     cron: name="Oinkmaster" minute="45" hour="8" job="oinkmaster -C /etc/oinkmaster.conf -o /etc/suricata/rules"
 
+  - name: Stop Suricata if it is running
+    service: name=suricata state=stopped
+    ignore_errors: yes
+
   - name: Start Suricata in IPS mode
     command: 'suricata -c /etc/suricata/suricata.yaml -q 0 --init-errors-fatal -D'
     ignore_errors: yes
